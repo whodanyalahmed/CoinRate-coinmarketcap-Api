@@ -19,3 +19,8 @@ After changing the API key just run the script by
 <blockquote> python3 <b> app.py </b> </blockquote>
 
 
+## what you will get from the script?
+You will get the current USD rates of <br><b>BTC BCH ETH XMR DASH FIL BAT ZRX REP KNC</b> coins
+
+## how script work?
+This script will run the program after every 10min(600sec) and append the new rate to the csv file.
