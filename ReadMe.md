@@ -11,10 +11,11 @@ Just type
 After changing the API key just run the script by
 
 
-### For windows:
+## For windows:
 <blockquote> python <b> app.py </b> </blockquote>
 <br>
-### For Linux:
+
+##  For Linux:
 <blockquote> python3 <b> app.py </b> </blockquote>
 
 
