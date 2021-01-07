@@ -23,7 +23,7 @@ session = Session()
 session.headers.update(headers)
 # it will extract this coin prices
 # BTC,ETH,BCH,XMR,DASH,FIL,BAT,ZRX,REP,KNC
-l = ['BTC','ETH','BCH','XMR','DASH','FIL','BAT','ZRX','REP','KNC']
+l = ['BTC','ETH','BCH','XMR','FIL','DASH','BAT','ZRX','REP','KNC']
 
 while True:
   print("\n\n")
@@ -35,7 +35,7 @@ while True:
   else:
       with open("file.csv","w+",newline='', encoding='utf-8') as f:
         writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(l)
+        writer.writerow(['BTC','ETH','BCH','XMR','FIL','DASH','BAT','ZRX','REP','KNC'])
       print ("info : File not exist... will create new file")
 
   rates = []
@@ -47,8 +47,8 @@ while True:
     data = json.loads(response.text)
     data = data['data']
     
-    for a in data:
-      for d in l:
+    for d in l:
+      for a in data:
         if(a['symbol'] == d ):
           rate = a['quote']['USD']['price']
           rates.append(rate)
