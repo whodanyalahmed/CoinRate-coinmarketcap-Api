@@ -16,13 +16,14 @@ headers = {
   'Accepts': 'application/json',
   # https://pro.coinmarketcap.com/account/
   # you can get that from here
-  'X-CMC_PRO_API_KEY': 'your api key here',
+  'X-CMC_PRO_API_KEY': 'abf52351-f0cb-4233-849f-bf948c944ace',
 }
 
 session = Session()
 session.headers.update(headers)
-
-l = [0,1,5,14,27,31,60,65,75,79]
+# it will extract this coin prices
+# BTC,ETH,BCH,XMR,DASH,FIL,BAT,ZRX,REP,KNC
+l = ['BTC','ETH','BCH','XMR','DASH','FIL','BAT','ZRX','REP','KNC']
 
 while True:
   print("\n\n")
@@ -34,7 +35,7 @@ while True:
   else:
       with open("file.csv","w+",newline='', encoding='utf-8') as f:
         writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(['BTC','ETH','BCH','XMR','DASH','FIL','BAT','ZRX','REP','KNC'])
+        writer.writerow(l)
       print ("info : File not exist... will create new file")
 
   rates = []
@@ -44,16 +45,17 @@ while True:
   try:
     response = session.get(url, params=parameters)
     data = json.loads(response.text)
+    data = data['data']
+    
+    for a in data:
+      for d in l:
+        if(a['symbol'] == d ):
+          rate = a['quote']['USD']['price']
+          rates.append(rate)
 
-    for d in l:
-      rate = data['data'][d]['quote']['USD']['price']
-      rates.append(rate)
     with open('file.csv',"a+",newline='', encoding='utf-8') as f:
       writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_MINIMAL)
       writer.writerow(rates)
-      # write(str(data['data'][0]['quote']['USD']['price']))
-    # for d in l:
-    #   print(data['data'][d]['quote'])
   except (ConnectionError, Timeout, TooManyRedirects) as e:
     print(e)
 
