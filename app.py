@@ -16,7 +16,7 @@ headers = {
   'Accepts': 'application/json',
   # https://pro.coinmarketcap.com/account/
   # you can get that from here
-  'X-CMC_PRO_API_KEY': 'abf52351-f0cb-4233-849f-bf948c944ace',
+  'X-CMC_PRO_API_KEY': 'Your api here',
 }
 
 session = Session()
